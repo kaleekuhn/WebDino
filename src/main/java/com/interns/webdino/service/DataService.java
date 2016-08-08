@@ -37,7 +37,7 @@ public class DataService {
 
         try{
 
-            mongoDataHelper.addDocument(Integer.valueOf(id), content);
+            //mongoDataHelper.addDocument(Integer.valueOf(id), content);
 
             result = ResponseEntity.ok("OK");
 

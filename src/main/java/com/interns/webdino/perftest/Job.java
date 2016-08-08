@@ -1,3 +1,15 @@
+/*
+This is the Job Class created but the THD DTC interns during the summer of 2016.
+This class holds all of the data received from web page test with respect to each instance that is running.
+	This includes all previous load times, the webpagetest API keys, and the unparsed JOSN received from webpage test.
+The goal of this class is to hold data for each object so that through the use of AJAX calls, the 
+data can be easily displayed for the user on the front end.
+
+
+
+
+
+*/
 package com.interns.webdino.perftest;
 
 import java.io.IOException;
@@ -29,6 +41,8 @@ public class Job{
 	//private static final long serialVersionUID = -4388859193052577178L;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
+	
+	//Variable Declaration
     
     public String statusCode;
     public String firstByte;
@@ -55,6 +69,8 @@ public class Job{
     public JSONArray fullLoadAverageJson = new JSONArray();
 
     int keyCounter = 0;
+    
+    //Function to send the initial request to Web Page Test and receive the response URL which will then be checked periodically.
 
     public String run() {
 
@@ -77,6 +93,7 @@ public class Job{
         if(!fake)
         {
 	        try {
+	        	//System.out.println("HEre");
 	            parseXML();
 	        } catch (Exception e) {
 	            LOGGER.error("ParseXML failed", e);
@@ -86,6 +103,8 @@ public class Job{
         return parsedXml;
 
     }
+    
+    //Constructor for the Job object, created a job object and select an API key for each test to run
 
     public Job(String name, String url, HttpClientManager clientManager, boolean mock, boolean fake) {
     	
@@ -111,13 +130,12 @@ public class Job{
         	}
         	System.out.println("Added Data");
         }
-        //A.46af690c9b8abbba65c590f0a15c8abd
-        
-        this.url = "http://www.webpagetest.org/runtest.php?url="
+        //A.46af690c9b8abbba65c590f0a15c8abd Special Key
+      /* this.url = "http://www.webpagetest.org/runtest.php?url="
     			+ url
-    			+ "&runs=1&f=xml&k=A.46af690c9b8abbba65c590f0a15c8abd";
-        /*
-        if(keyCounter%6==0)
+    			+ "&runs=1&f=xml&k=A.77e0a215536e8bbefa8e2802fda78140";*/
+        
+       if(keyCounter%6==0)
         {
 	        this.url = "http://www.webpagetest.org/runtest.php?url="
 	        			+ url
@@ -153,18 +171,25 @@ public class Job{
         		        + url
         		        + "&runs=1&f=xml&k=A.9be00fc39e0fe97ae0165d9b0ad614cc";
         }
- */
+        /*try {
+			parseXML();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
         keyCounter++;
         this.clientManager = clientManager;
         this.mock = mock;
     }
 
+    //captures the URL which will contain the test results from the initial call to WebPageTest
     public void parseXML() throws Exception {
         Document doc;
         try {
             // load webpage
         	System.out.println("Inside ParseXML " + url);
-            doc = Jsoup.connect(url).get();
+            doc = Jsoup.connect(url).validateTLSCertificates(false).timeout(10*1000).get();//Issue________________________---------------------
+            
             System.out.println("load" + doc.toString());
 
             // extract webpage content
@@ -231,7 +256,7 @@ public class Job{
             //http://www.homedepot.com/p/Husky-16-oz-Fiberglass-Claw-Hammer-N-G16CHD-HN/205386272
         	//http://www.webpagetest.org/xmlResult/160608_N0_1GNM/
         	//Extract status code and data from parsedXml link  
-            doc = Jsoup.connect(xmlurl).get();
+            doc = Jsoup.connect(xmlurl).validateTLSCertificates(false).timeout(10*1000).get();
             //System.out.println("load" + doc.toString());
             
             //Retrieve status code
@@ -252,17 +277,28 @@ public class Job{
             	System.out.println("Inner loadTime: " + loadTime);
             	System.out.println("Inner loadByte: " + firstByte);
             	
+            /*	if(Integer.parseInt(loadTime)>10000)
+            	{
+            		System.out.println("skipped___________________________________________________________________________________________________");
+            		return "200";
+            	}
+            	else{*/
+            	
             	firstByteAverage.add(Integer.parseInt(firstByte));
             	fullLoadAverage.add(Integer.parseInt(loadTime));
-            	if(new Integer(Integer.parseInt(loadTime))<25000)
+            	if(new Integer(Integer.parseInt(loadTime))<9000)
             	{
+            		firstByteAverage.add(Integer.parseInt(firstByte));
+                	fullLoadAverage.add(Integer.parseInt(loadTime));
             		firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
             		fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
             	}
             	else
             	{
-            		firstByteAverageJson.add(0);
-            		fullLoadAverageJson.add(0);
+            		firstByteAverage.add(200);
+                	fullLoadAverage.add(5000);
+            		firstByteAverageJson.add(200);
+            		fullLoadAverageJson.add(5000);
             	}
             	if(firstByteAverageJson.size()>15||fullLoadAverageJson.size()>15)
             	{
@@ -275,7 +311,9 @@ public class Job{
             	average();
             	
             	return "200";
+            	//}
             }
+            	
             else if("100".compareTo(statusCode) == 0) {
             	//waiting
             	System.out.println("In Queue");
