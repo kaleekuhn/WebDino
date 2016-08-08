@@ -116,7 +116,7 @@ public class JobService {
     		jobMaster.runJob(jobMaster.getJob(name).getName());
     	}
         
-        db.addDocument(1, jobMaster.getJob(name));
+        //db.addDocument(1, jobMaster.getJob(name));
         jobMaster.getxmlInfo(jobMaster.getJob(name).getName(), isFake);////////////////////////////////////////////////
        // jobMaster.save();
         return new ResponseEntity<>(jobMaster.getJob(name), HttpStatus.OK);

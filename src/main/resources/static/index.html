@@ -33,6 +33,7 @@
 	text-align: center;
 	background-color: #e5eecc;
 	border: solid 1px #c3c3c3;
+	overflow-x: false;
 }
 
 #panel {
@@ -1008,7 +1009,7 @@
 				}
 			});
 		}
-		var numberOfRuns1 = 0;
+		var numberOfRuns1 = 5;
 
 		function addJob1() {
 	
@@ -1087,7 +1088,8 @@
 																			fullLoadArr : result.fullLoadAverageJson
 																		};
 																	 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																		 var data = {
+																	 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
+																	 	var data = {
 																			    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																			    datasets: [{
 																			        label: "Time To First Byte(ms)",
@@ -1096,6 +1098,7 @@
 																			        highlightFill: "rgba(0,107,0,1))",
 																			        highlightStroke: "rgba(0,107,0,1)",
 																			        backgroundColor: "rgba(254,108,20,.9)",
+																			      
 																			        data: answer.firstByteArr
 																			    }, {
 																			        label: "Time To Full Load(ms)",
@@ -1286,25 +1289,25 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob1, 60000);
+										setTimeout(addJob1, 60000*15);
 									}
 									else if(document.getElementById("time30.1").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob1, 60000);
+										setTimeout(addJob1, 60000*30);
 									}
 									else if(document.getElementById("time60.1").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob1, 60000);
+										setTimeout(addJob1, 60000*60);
 									}
 									else if(document.getElementById("time90.1").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob1, 60000);
+										setTimeout(addJob1, 60000*90);
 									}
 									else{
 									console.log("Waiting 2nd");
@@ -1331,7 +1334,7 @@
 			console.log("Moose");
 		}
 		
-		var numberOfRuns2 = 0;
+		var numberOfRuns2 = 4;
 
 		function addJob2() {
 
@@ -1410,7 +1413,8 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																			 var data = {
+																		 	Chart.defaults.global.defaultFontColor = '#E0E0E0'; 
+																		 	var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -1561,7 +1565,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner2").style.display = "none";
 																		
-																			if(numberOfRuns2<20&&!answer.fake){
+																			if(!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns2);
 																				job.continueInterval();		
 																			} else {
@@ -1609,25 +1613,25 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob2, 60000);
+										setTimeout(addJob2, 60000*15);
 									}
 									else if(document.getElementById("time30.2").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob2, 60000);
+										setTimeout(addJob2, 60000*30);
 									}
 									else if(document.getElementById("time60.2").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob2, 60000);
+										setTimeout(addJob2, 60000*60);
 									}
 									else if(document.getElementById("time90.2").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob2, 60000);
+										setTimeout(addJob2, 60000*90);
 									}
 									else{
 									console.log("Waiting 2nd");
@@ -1654,7 +1658,7 @@
 			console.log("Moose2");
 		}
 		
-		var numberOfRuns3 = 0;
+		var numberOfRuns3 = 3;
 
 		function addJob3() {
 
@@ -1733,7 +1737,8 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																			 var data = {
+																		 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
+																		 	var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -1884,7 +1889,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner3").style.display = "none";
 																		
-																			if(numberOfRuns3<20&&!answer.fake){
+																			if(!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns3);
 																				job.continueInterval();		
 																			} else {
@@ -1932,25 +1937,25 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob3, 60000);
+										setTimeout(addJob3, 60000*15);
 									}
 									else if(document.getElementById("time30.3").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob3, 60000);
+										setTimeout(addJob3, 60000*30);
 									}
 									else if(document.getElementById("time60.3").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob3, 60000);
+										setTimeout(addJob3, 60000*60);
 									}
 									else if(document.getElementById("time90.3").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob3, 60000);
+										setTimeout(addJob3, 60000*90);
 									}
 									else{
 									console.log("Waiting 2nd");
@@ -1977,7 +1982,7 @@
 			console.log("Moose3");
 		}
 		
-		var numberOfRuns4 = 0;
+		var numberOfRuns4 = 2;
 
 		function addJob4() {
 
@@ -2056,7 +2061,8 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																			 var data = {
+																		 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
+																		 	var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -2207,7 +2213,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner4").style.display = "none";
 																		
-																			if(numberOfRuns4<20&&!answer.fake){
+																			if(!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns4);
 																				job.continueInterval();		
 																			} else {
@@ -2242,7 +2248,7 @@
 											}, CONST_INTERVAL);
 								},
 								stopInterval : function() {
-									console.log("Moose");
+									console.log("Ending Function:(");
 
 									clearInterval(this.intervalRef);
 								},
@@ -2255,25 +2261,26 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob4, 60000);
+										setTimeout(addJob4, 60000*15);
 									}
 									else if(document.getElementById("time30.4").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob4, 60000);
+										setTimeout(addJob4, 60000*30);
 									}
 									else if(document.getElementById("time60.4").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob4, 60000);
+										setTimeout(addJob4, 60000*60);
+										console.log("Here We Go!");	
 									}
 									else if(document.getElementById("time90.4").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob4, 60000);
+										setTimeout(addJob4, 60000*90);
 									}
 									else{
 									console.log("Waiting 4nd");
@@ -2285,7 +2292,7 @@
 
 							//Begin interval
 							job.startInterval();
-							console.log("stuu " + job.ttfb);
+							console.log("Touched? stuu " + job.ttfb);
 							jobList.set(result.name, job);
 						},
 						error : function() {
@@ -2300,7 +2307,7 @@
 			console.log("Moose4");
 		}
 		
-		var numberOfRuns5 = 0;
+		var numberOfRuns5 = 1;
 
 		function addJob5() {
 
@@ -2379,7 +2386,8 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																			 var data = {
+																		 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
+																		 	var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -2530,7 +2538,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner5").style.display = "none";
 																		
-																			if(numberOfRuns5<20&&!answer.fake){
+																			if(!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns5);
 																				job.continueInterval();		
 																			} else {
@@ -2578,25 +2586,25 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob5, 60000);
+										setTimeout(addJob5, 60000*15);
 									}
 									else if(document.getElementById("time30.5").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob5, 60000);
+										setTimeout(addJob5, 60000*30);
 									}
 									else if(document.getElementById("time60.5").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob5, 60000);
+										setTimeout(addJob5, 60000*60);
 									}
 									else if(document.getElementById("time90.5").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob5, 60000);
+										setTimeout(addJob5, 60000*90);
 									}
 									else{
 									console.log("Waiting 5nd");
@@ -2703,7 +2711,8 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
-																			 var data = {
+																		 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
+																		 	var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -2854,7 +2863,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner6").style.display = "none";
 																		
-																			if(numberOfRuns6<20&&!answer.fake){
+																			if(!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns6);
 																				job.continueInterval();		
 																			} else {
@@ -2902,25 +2911,25 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
-										setTimeout(addJob6, 60000);
+										setTimeout(addJob6, 60000*15);
 									}
 									else if(document.getElementById("time30.6").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
-										setTimeout(addJob6, 60000);
+										setTimeout(addJob6, 60000*30);
 									}
 									else if(document.getElementById("time60.6").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
-										setTimeout(addJob6, 60000);
+										setTimeout(addJob6, 60000*60);
 									}
 									else if(document.getElementById("time90.6").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
-										setTimeout(addJob6, 60000);
+										setTimeout(addJob6, 60000*90);
 									}
 									else{
 									console.log("Waiting 6nd");
