@@ -11,6 +11,11 @@ body{
 }
 #welcome{
 	margin-top: 5px;
+	text-align: left;
+	color:#ff6633;
+}clearInterval(this.intervalRef);
+#help{
+	text-align: right;
 	color:#ff6633;
 }
 #urlTitle{

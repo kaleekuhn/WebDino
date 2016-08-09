@@ -75,13 +75,12 @@
 		<h1 class="col col-md-10" id="welcome">
 			<img src="dino.png" style="width: 133px;">WebDino
 			<!-- <button type="button" id="addButtonTop" class="btn btn-primary">ADD</button> -->
-			
 		</h1>
-		<!-- <h1 class="col col-md-2">
+		<h1 class="col col-md-2">
 			<div id="pastTests" style="cursor: pointer; text-align: right; margin-top: 20px;">
-				<a href="http://localhost:8080/webdino/data?" target="_blank">Past Tests <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+				<a href="http://localhost:8080/webdino/data?" target="_blank">Help<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 			</div>
-		</h1> -->
+		</h1>
 		
 		
 		<!-- 		<div class="jumbotron">
@@ -313,7 +312,8 @@
 					</div>
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
-						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner2 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner2 aria-hidden=true  style= ""></i>
+						<i class="fa fa-times" id="cancelJob2" aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -1339,7 +1339,7 @@
 		function addJob2() {
 
 			var temp = document.getElementById("spinner2").style.display = "block";
-
+			var cancelJob2 = false;
 			var url = $("#urlInput2").val();
 			var name = $("#nameInput2").val();
 			console.log("Adding job for URL: " + url);
@@ -1358,6 +1358,7 @@
 						},
 						success : function(result) {
 							//Create javascript object appending functionality
+							//var cancelJob2 = false;
 							var job = {
 								name : result.name,
 								ttfb : result.firstByte,
@@ -1383,9 +1384,9 @@
 															success : function(result) {
 																//Create javascript object appending functionality
 
-																console.log("result: " + result);
-																console.log("statusNum: "+ job.statusNum);
-
+																console.log("result2: " + result);
+																console.log("statusNum2: "+ job.statusNum);
+																console.log("cancelJobStatus2: " + cancelJob2);
 																if ("200" == result) {
 																	$.ajax({
 																		url : "http://localhost:8080/webdino/job/output",
@@ -1577,6 +1578,11 @@
 																			console.log("Unable to get final informations for: " + url);
 																		}
 																	});
+																}
+																if(cancelJob2 == true) {
+																	job.stopInterval();
+																	$("#simpleProgress2").text("Job Canceled");
+																	cancelJob = false;
 																}
 																if ("101" == result) {
 																	$("#simpleProgress2").text("Testing");
@@ -2404,7 +2410,7 @@
 																				        highlightFill: "rgba(0,107,0,1))",
 																				        highlightStroke: "rgba(0,107,0,1)",
 																				        backgroundColor: "rgba(254,108,20,.65)",
-																				        5000			        data: answer.fullLoadArr
+																				        data: answer.fullLoadArr
 																				    }]
 																				};
 																			var ctx = document.getElementById("chart5");
@@ -2992,6 +2998,12 @@
 				console.log("Add Button6");
 				addJob6();
 			});
+			
+			/*$("#cancelJob2").click(function() {
+				console.log("Cancel Job2");
+				addJob2.stopInterval;
+			});*/
+			
 
 		});
 	</script>
