@@ -30,6 +30,9 @@ body{
 	text-align: right;
 	color:#ff6633;
 }
+#helper{
+	font-size: 25px;
+}
 #urlTitle{
 	font-size:32px;
 	color:#ff6633;
