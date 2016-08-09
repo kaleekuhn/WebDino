@@ -72,15 +72,23 @@
  -->	
  	<!-- &*(#@$&(#&$(#@&$*(@#&$)(*@#$)(@#*$)(#@*$)(#$*)(#@*$)(#@&$*($#@&$(*#@&$)#@*$*)#@($*)#@($*)(#*$)(#@*$)(#@*$)(#@$*)(#*$)(#*$)(#$*)#(@*$)(#*$)(#@*$)(#@$ -->
  	<div class="fullContainer" role="main">
-		<h1 class="col col-md-10" id="welcome">
-			<img src="dino.png" style="width: 133px;">WebDino
-			<!-- <button type="button" id="addButtonTop" class="btn btn-primary">ADD</button> -->
-		</h1>
-		<h1 class="col col-md-2">
-			<div id="pastTests" style="cursor: pointer; text-align: right; margin-top: 20px;">
-				<a href="http://localhost:8080/webdino/data?" target="_blank">Help<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-			</div>
-		</h1>
+ 		<div class="row">
+			<h1 class="col col-md-3" id="welcome">
+				<img src="dino.png" style="width: 133px;">WebDino
+				<!-- <button type="button" id="addButtonTop" class="btn btn-primary">ADD</button> -->
+			</h1>
+			<h3 class="col col-md-7" id="info">
+				A Web Page Performance Tester Created By THD Interns Kalee Kuhn and Matthew Lee
+			</h3>
+			<h1 class="col col-md-2" id="helpButton">
+				HELP<i class="fa fa-arrow-circle-right" aria-hidden="true"
+							 	btn-lg" data-toggle="modal" data-target="#helpModal"></i>
+				
+				<!-- <div id="pastTests" style="cursor: pointer; text-align: right; margin-top: 20px;">
+					<a href="http://localhost:8080/webdino/data?" target="_blank">Help<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+				</div> -->
+			</h1>
+		</div>
 		
 		
 		<!-- 		<div class="jumbotron">
@@ -254,8 +262,9 @@
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
 						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner1 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-times" id="cancelJob1" aria-hidden="true"></i>
 					</div>
-					
+				
 				</div>
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
@@ -312,7 +321,7 @@
 					</div>
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
-						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner2 aria-hidden=true  style= ""></i>
+						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner2 aria-hidden=true  style= "display:none"></i>
 						<i class="fa fa-times" id="cancelJob2" aria-hidden="true"></i>
 					</div>
 				</div>
@@ -358,6 +367,7 @@
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
 						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner3 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-times" id="cancelJob3" aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -404,6 +414,7 @@
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
 						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner4 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-times" id="cancelJob4" aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -450,6 +461,7 @@
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
 						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner5 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-times" id="cancelJob5" aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -496,6 +508,7 @@
 					<div class="col col-md-2">
 						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
 						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner6 aria-hidden=true  style= "display:none"></i>
+						<i class="fa fa-times" id="cancelJob6" aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -826,6 +839,27 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="helpModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-title" id="urlTitle">Web Page Tester</div>
+				</div>
+				<div class="modal-body">
+					This is the Help Page for the WebDino!
+			</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 
 
@@ -1010,11 +1044,15 @@
 			});
 		}
 		var numberOfRuns1 = 5;
-
+		var cancelJob1 = false;
 		function addJob1() {
 	
 			var temp = document.getElementById("spinner1").style.display = "block";
 
+			/*var newURL = $("#nameInput1").val();
+			 if(newURL!=name){
+				jobMaster.removeJob(name);
+			} */
 			
 			var url = $("#urlInput1").val();
 			var name = $("#nameInput1").val();
@@ -1254,7 +1292,15 @@
 																	}
 																});
 															}
-															if ("101" == result) {
+															if(window.cancelJob1 == true) {
+																console.log("InSide bby");
+																$("#simpleProgress1").text("Job Canceled");
+																document.getElementById("spinner1").style.display = "none";
+																window.cancelJob1 = false;
+																job.stopInterval();
+																console.log("End bby");
+															}
+															else if ("101" == result) {
 																$("#simpleProgress1").text("Testing");
 															} else if ("100" == result) {
 																$("#simpleProgress1").text("In Queue");
@@ -1335,11 +1381,11 @@
 		}
 		
 		var numberOfRuns2 = 4;
-
+		var cancelJob2 = false;
 		function addJob2() {
 
 			var temp = document.getElementById("spinner2").style.display = "block";
-			var cancelJob2 = false;
+			
 			var url = $("#urlInput2").val();
 			var name = $("#nameInput2").val();
 			console.log("Adding job for URL: " + url);
@@ -1386,7 +1432,7 @@
 
 																console.log("result2: " + result);
 																console.log("statusNum2: "+ job.statusNum);
-																console.log("cancelJobStatus2: " + cancelJob2);
+																console.log("cancelJobStatus2: " + window.cancelJob2);
 																if ("200" == result) {
 																	$.ajax({
 																		url : "http://localhost:8080/webdino/job/output",
@@ -1579,12 +1625,15 @@
 																		}
 																	});
 																}
-																if(cancelJob2 == true) {
-																	job.stopInterval();
+																if(window.cancelJob2 == true) {
+																	console.log("InSide bby");
 																	$("#simpleProgress2").text("Job Canceled");
-																	cancelJob = false;
+																	document.getElementById("spinner2").style.display = "none";
+																	window.cancelJob2 = false;
+																	job.stopInterval();
+																	console.log("End bby");
 																}
-																if ("101" == result) {
+																else if ("101" == result) {
 																	$("#simpleProgress2").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress2").text("In Queue");
@@ -1607,7 +1656,6 @@
 								},
 								stopInterval : function() {
 									console.log("Moose");
-
 									clearInterval(this.intervalRef);
 								},
 								continueInterval : function() {
@@ -1665,7 +1713,7 @@
 		}
 		
 		var numberOfRuns3 = 3;
-
+		var cancelJob3 = false;
 		function addJob3() {
 
 			var temp = document.getElementById("spinner3").style.display = "block";
@@ -1908,7 +1956,15 @@
 																		}
 																	});
 																}
-																if ("101" == result) {
+																if(window.cancelJob3 == true) {
+																	console.log("InSide bby");
+																	$("#simpleProgress3").text("Job Canceled");
+																	document.getElementById("spinner3").style.display = "none";
+																	window.cancelJob3 = false;
+																	job.stopInterval();
+																	console.log("End bby");
+																}
+																else if ("101" == result) {
 																	$("#simpleProgress3").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress3").text("In Queue");
@@ -1989,7 +2045,7 @@
 		}
 		
 		var numberOfRuns4 = 2;
-
+		var cancelJob4 = false;
 		function addJob4() {
 
 			var temp = document.getElementById("spinner4").style.display = "block";
@@ -2232,7 +2288,15 @@
 																		}
 																	});
 																}
-																if ("101" == result) {
+																if(window.cancelJob4 == true) {
+																	console.log("InSide bby");
+																	$("#simpleProgress4").text("Job Canceled");
+																	document.getElementById("spinner4").style.display = "none";
+																	window.cancelJob4 = false;
+																	job.stopInterval();
+																	console.log("End bby");
+																}
+																else if ("101" == result) {
 																	$("#simpleProgress4").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress4").text("In Queue");
@@ -2314,7 +2378,7 @@
 		}
 		
 		var numberOfRuns5 = 1;
-
+		var cancelJob5 = false;
 		function addJob5() {
 
 			var temp = document.getElementById("spinner5").style.display = "block";
@@ -2557,7 +2621,15 @@
 																		}
 																	});
 																}
-																if ("101" == result) {
+																if(window.cancelJob5 == true) {
+																	console.log("InSide bby");
+																	$("#simpleProgress5").text("Job Canceled");
+																	document.getElementById("spinner5").style.display = "none";
+																	window.cancelJob5 = false;
+																	job.stopInterval();
+																	console.log("End bby");
+																}
+																else if ("101" == result) {
 																	$("#simpleProgress5").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress5").text("In Queue");
@@ -2638,7 +2710,7 @@
 		}
 		
 		var numberOfRuns6 = 0;
-
+		var cancelJob6 = false;
 		function addJob6() {
 			
 			var temp = document.getElementById("spinner6").style.display = "block";
@@ -2882,7 +2954,15 @@
 																		}
 																	});
 																}
-																if ("101" == result) {
+																if(window.cancelJob6 == true) {
+																	console.log("InSide bby");
+																	$("#simpleProgress6").text("Job Canceled");
+																	document.getElementById("spinner6").style.display = "none";
+																	window.cancelJob6 = false;
+																	job.stopInterval();
+																	console.log("End bby");
+																}
+																else if ("101" == result) {
 																	$("#simpleProgress6").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress6").text("In Queue");
@@ -2999,10 +3079,31 @@
 				addJob6();
 			});
 			
-			/*$("#cancelJob2").click(function() {
+			$("#cancelJob1").click(function() {
+				console.log("Cancel Job1");
+				window.cancelJob1 = true;
+			});
+			
+			$("#cancelJob2").click(function() {
 				console.log("Cancel Job2");
-				addJob2.stopInterval;
-			});*/
+				window.cancelJob2 = true;
+			});
+			$("#cancelJob3").click(function() {
+				console.log("Cancel Job3");
+				window.cancelJob3 = true;
+			});
+			$("#cancelJob4").click(function() {
+				console.log("Cancel Job4");
+				window.cancelJob4 = true;
+			});
+			$("#cancelJob5").click(function() {
+				console.log("Cancel Job5");
+				window.cancelJob5 = true;
+			});
+			$("#cancelJob6").click(function() {
+				console.log("Cancel Job6");
+				window.cancelJob6 = true;
+			});
 			
 
 		});

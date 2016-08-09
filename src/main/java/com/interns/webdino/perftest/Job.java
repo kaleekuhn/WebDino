@@ -54,6 +54,7 @@ public class Job{
     
     public String name;
     private String url;
+    private String testUrl;
     private String rawXml;
     private String parsedXml;
     private HttpClientManager clientManager;
@@ -69,6 +70,8 @@ public class Job{
     public JSONArray fullLoadAverageJson = new JSONArray();
 
     int keyCounter = 0;
+    
+    Keys key = new Keys();
     
     //Function to send the initial request to Web Page Test and receive the response URL which will then be checked periodically.
 
@@ -110,10 +113,11 @@ public class Job{
     	
         this.name = name;
         this.fake = fake;
+        testUrl = url;
         //A.77d136a242db623122d15fab6a8bc2a7
         //A.9be00fc39e0fe97ae0165d9b0ad614cc
         //A.78f7cf06c141dbdbf9e2bbd9d6a7c041
-        System.out.println("Key: " + keyCounter%6 + "-----------------------------------------------------");
+       // System.out.println("Key: " + keyCounter%6 + "-----------------------------------------------------");
         
         if(fake)
         {
@@ -135,7 +139,7 @@ public class Job{
     			+ url
     			+ "&runs=1&f=xml&k=A.77e0a215536e8bbefa8e2802fda78140";*/
         
-       if(keyCounter%6==0)
+      /* if(keyCounter%6==0)
         {
 	        this.url = "http://www.webpagetest.org/runtest.php?url="
 	        			+ url
@@ -170,13 +174,17 @@ public class Job{
         	 this.url = "http://www.webpagetest.org/runtest.php?url="
         		        + url
         		        + "&runs=1&f=xml&k=A.9be00fc39e0fe97ae0165d9b0ad614cc";
-        }
+        }*/
         /*try {
 			parseXML();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+       /*this.url = "http://www.webpagetest.org/runtest.php?url="
+		        + url
+		        + "&runs=1&f=xml&k="+key.getKey();*/
+        
         keyCounter++;
         this.clientManager = clientManager;
         this.mock = mock;
@@ -187,12 +195,24 @@ public class Job{
         Document doc;
         try {
             // load webpage
+        	 url = "http://www.webpagetest.org/runtest.php?url="
+     		        + testUrl
+     		        + "&runs=1&f=xml&k="+key.getKey();
+        	 
         	System.out.println("Inside ParseXML " + url);
+        	
             doc = Jsoup.connect(url).validateTLSCertificates(false).timeout(10*1000).get();//Issue________________________---------------------
             
             System.out.println("load" + doc.toString());
 
             // extract webpage content
+            String status = doc.select("statuscode").first().text();
+            if("400".compareTo(status)==0)
+            {
+            	System.out.println("Retrying");
+            	parseXML();
+            }
+            System.out.println("Status:" + status);
             Element link = doc.select("xmlurl").first();
             parsedXml = link.text();
             System.out.println("Linkn" + parsedXml);

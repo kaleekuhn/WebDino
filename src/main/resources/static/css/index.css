@@ -13,8 +13,20 @@ body{
 	margin-top: 5px;
 	text-align: left;
 	color:#ff6633;
-}clearInterval(this.intervalRef);
+}
 #help{
+	margin-top:45px;
+	vertical-align: bottom !importrant;
+	text-align: right;
+	color:#ff6633;
+}
+#info{
+	margin-top:33px;
+	vertical-align: bottom !important;
+	text-align: center;
+	color:#ff6633;
+}
+#helpButton{
 	text-align: right;
 	color:#ff6633;
 }
