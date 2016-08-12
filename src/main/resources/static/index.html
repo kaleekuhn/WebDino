@@ -629,7 +629,7 @@
 							<div id="url"> URL:</div>
 						</div>
 						<div class="col col-md-9">
-							<input type="text" id="urlInput2" value="http://www.homedepot.com/p/Samsung-27-8-cu-ft-Food-Showcase-French-Door-Refrigerator-in-Stainless-Steel-RF28HDEDBSR/205143861" placeholder="Enter URL Here"> 
+							<input type="text" id="urlInput2" value="http://www.homedepot.com/" placeholder="Enter URL Here"> 
 						</div>
 					</div>
 					<div class="row" id=url>
@@ -637,7 +637,7 @@
 							<div id="url"> Name:</div>
 						</div>
 						<div class="col col-md-9" >
-							<input type="text" id="nameInput2" value="PIP Appliance" placeholder="Enter Name Here"> 
+							<input type="text" id="nameInput2" value="HomePage" placeholder="Enter Name Here"> 
 						</div>
 					</div>
 					<div class="row">
@@ -1063,23 +1063,26 @@
 			});
 		}
 		var numberOfRuns1 = 5;
+		var runInterval1 = 30;
 		var cancelJob1 = false;
 		function addJob1() {
 	
-			var temp = document.getElementById("spinner1").style.display = "block";
-
+			var temp = document.getElementById("spinner1").style.display = "block"; 
 			/*var newURL = $("#nameInput1").val();
 			 if(newURL!=name){
 				jobMaster.removeJob(name);
 			} */
-			
+			var countdown=null;
+			if(countdown!=null){
+				clearInterval(countDown);
+			}
 			var url = $("#urlInput1").val();
 			var name = $("#nameInput1").val();
 			console.log("Adding job for URL: " + url);
 			//$("#simpleUrl1").text("THD/" + url.substring(27,48));
 			$("#simpleUrl1").text(name);
 			//document.getElementById("simpleUrl1").setAttribute("title",url);
-			$("#simpleProgress1").text("Starting");
+			$("#simpleProgress1").text("Starting Test!");
 			//for(var x=0; x<3; x++){
 			$.ajax({
 						url : "http://localhost:8080/webdino/job/",
@@ -1144,6 +1147,9 @@
 																			firstByteArr : result.firstByteAverageJson,
 																			fullLoadArr : result.fullLoadAverageJson
 																		};
+																		
+																	
+																		
 																	 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
 																	 	Chart.defaults.global.defaultFontColor = '#E0E0E0';
 																	 	var data = {
@@ -1294,6 +1300,13 @@
 																		$("#simpleFullLoad1Avg").text("Avg: " + answer.fullAverage+ "ms");
 																		//$("#simpleDate").text(job.ttfb);
 																		$("#simpleUrl1").text(answer.name);
+																		
+																		//attempt to create countdown timer
+																		/* var start = new Date;
+																		countDown = setInterval(function() {
+																			   $("#simpleProgress1").text(Math.ceil((((60000*runInterval1)-(new Date - start)) / (1000*60))) + " Minutes");
+																			}, 1000);
+																		clearInterval(countdown); */
 																		$("#simpleProgress1").text("Completed");
 																		console.log("Array: " + answer.firstByteArr);
 																		var temp = document.getElementById("spinner1").style.display = "none";
@@ -1354,28 +1367,33 @@
 									{
 										console.log("15 checked");	
 										console.log("Waiting");
+										runInterval1=15;
 										setTimeout(addJob1, 60000*15);
 									}
 									else if(document.getElementById("time30.1").checked)
 									{
 										console.log("30 checked");	
 										console.log("Waiting");
+										runInterval1=30;
 										setTimeout(addJob1, 60000*30);
 									}
 									else if(document.getElementById("time60.1").checked)
 									{
 										console.log("60 checked");	
 										console.log("Waiting");
+										runInterval1=60;
 										setTimeout(addJob1, 60000*60);
 									}
 									else if(document.getElementById("time90.1").checked)
 									{
 										console.log("90 checked");	
 										console.log("Waiting");
+										runInterval1=90;
 										setTimeout(addJob1, 60000*90);
 									}
 									else{
 									console.log("Waiting 2nd");
+									runInterval1=30;
 									setTimeout(addJob1, 60000*30);
 									}
 									//addJob1();

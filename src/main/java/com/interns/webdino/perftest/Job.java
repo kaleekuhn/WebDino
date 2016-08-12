@@ -191,6 +191,7 @@ public class Job{
     }
 
     //captures the URL which will contain the test results from the initial call to WebPageTest
+    int retry=0;
     public void parseXML() throws Exception {
         Document doc;
         try {
@@ -207,9 +208,10 @@ public class Job{
 
             // extract webpage content
             String status = doc.select("statuscode").first().text();
-            if("400".compareTo(status)==0)
+            if("400".compareTo(status)==0&&retry<=Keys.apiCounter.length)
             {
             	System.out.println("Retrying");
+            	retry++;
             	parseXML();
             }
             System.out.println("Status:" + status);
@@ -303,23 +305,25 @@ public class Job{
             		return "200";
             	}
             	else{*/
-            	
-            	firstByteAverage.add(Integer.parseInt(firstByte));
-            	fullLoadAverage.add(Integer.parseInt(loadTime));
-            	if(new Integer(Integer.parseInt(loadTime))<9000)
+            	/*if(Integer.parseInt(loadTime)<15000)
+            	{
+	            	firstByteAverage.add(Integer.parseInt(firstByte));
+	            	fullLoadAverage.add(Integer.parseInt(loadTime));
+            	}*/
+            	if(new Integer(Integer.parseInt(loadTime))<15000)
             	{
             		firstByteAverage.add(Integer.parseInt(firstByte));
                 	fullLoadAverage.add(Integer.parseInt(loadTime));
             		firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
             		fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
             	}
-            	else
+            	/*else
             	{
             		firstByteAverage.add(200);
                 	fullLoadAverage.add(5000);
             		firstByteAverageJson.add(200);
             		fullLoadAverageJson.add(5000);
-            	}
+            	}*/
             	if(firstByteAverageJson.size()>15||fullLoadAverageJson.size()>15)
             	{
             		firstByteAverageJson.remove(0);
